@@ -4,7 +4,7 @@ var http = require('http');
 var spawn = require('child_process').spawn;
 
 function handl(request, response){
-	var chld = spawn('jmediastreamvalidatorava', ['-t 10', '-O out_json', 'http://10.7.0.62:7777/source_1_hls.m3u8']);
+	var chld = spawn('mediastreamvalidatorava', ['-t 10', '-O out_json', 'http://10.7.0.62:7777/source_1_hls.m3u8']);
 	chld.stdout.setEncoding('utf8');
 	
 	chld.stdout.on('data', function (data) {
@@ -12,6 +12,7 @@ function handl(request, response){
 	
 		console.log('DATAis ' + str);
 	});
+	
 	chld.on('close', function (code) {
     console.log('process exit code ' + code);
 	});
@@ -19,6 +20,7 @@ function handl(request, response){
 	chld.on('error', function (code) {
     console.log('ERROR');
 	});
+	
 	chld.stderr.on('data', (data) => {
 		console.error(`child stderr:\n${data}`);
 	});
