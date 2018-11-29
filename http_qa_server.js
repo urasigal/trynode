@@ -4,13 +4,13 @@ var http = require('http');
 var spawn = require('child_process').spawn;
 
 function handl(request, response){
-	var chld = spawn('mediastreamvalidatorava', ['-t 10', '-O out_json', 'http://10.7.0.62:7777/source_1_hls.m3u8']);
+	var chld = spawn('mediastreamvalidator', ['-t 10', '-O out_json', 'http://10.7.0.62:7777/source_1_hls.m3u8']);
 	chld.stdout.setEncoding('utf8');
 	
 	chld.stdout.on('data', function (data) {
 		var str = data.toString()
 	
-		console.log('DATAis ' + str);
+		console.log('DATA is ' + str);
 	});
 	
 	chld.on('close', function (code) {
@@ -22,6 +22,10 @@ function handl(request, response){
 	});
 	
 	chld.stderr.on('data', (data) => {
+		console.error(`child stderr:\n${data}`);
+	});
+	
+	chld.stderr.on('error', (data) => {
 		console.error(`child stderr:\n${data}`);
 	});
 
