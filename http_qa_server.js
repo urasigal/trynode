@@ -1,7 +1,8 @@
 // http_qa_server.js
 
-var http = require('http');
-var spawn = require('child_process').spawn;
+var http 	= require('http');
+var spawn 	= require('child_process').spawn;
+var fs 		= require('fs');
 
 function handl(request, response){
 	var chld = spawn('mediastreamvalidator', ['-t 10', '-O out_json', 'http://10.7.0.62:7777/source_1_hls.m3u8']);
@@ -14,7 +15,14 @@ function handl(request, response){
 	});
 	
 	chld.on('close', function (code) {
-    console.log('process exit code ' + code);
+		console.log('process exit code ' + code);
+		if(code == 0)
+		{
+			var content = fs.readFileSync('out_json');
+			response.writeHead(200);
+			response.write(content);
+			
+		}
 	});
 	
 	chld.on('error', function (code) {
