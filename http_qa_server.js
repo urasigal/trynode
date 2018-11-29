@@ -21,6 +21,7 @@ function handl(request, response){
 			var content = fs.readFileSync('out_json');
 			response.writeHead(200);
 			response.write(content);
+			response.end();
 			
 		}
 	});
