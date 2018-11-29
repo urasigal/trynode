@@ -5,7 +5,7 @@ var spawn 	= require('child_process').spawn;
 var fs 		= require('fs');
 
 function handl(request, response){
-	var chld = spawn('mediastreamvalidator', ['-t 10', '-O out_json', 'http://10.7.0.62:7777/source_1_hls.m3u8']);
+	var chld = spawn('mediastreamvalidator', ['-t 10', '-O ./out_json', 'http://10.7.0.62:7777/source_1_hls.m3u8']);
 	chld.stdout.setEncoding('utf8');
 	
 	chld.stdout.on('data', function (data) {
