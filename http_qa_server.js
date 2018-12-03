@@ -24,7 +24,7 @@ function handl (request, response) {
     console.log('process exit code ' + code)
     if (code === 0) {
       // Read valdator output from file.
-      var content = fs.readFileSync('out_json')
+      var content = fs.readFileSync('./out_json')
       response.writeHead(200)
       response.write(content)
       response.end()
