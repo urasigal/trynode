@@ -11,7 +11,7 @@ function handl (request, response) {
   let urlParam = queryString.slice(queryString.indexOf('=') + 1)
   console.log('URL params are ' + urlParam)
 
-  // Run validator from a command line.
+  // Run validator as a command line.
   var chld = spawn('mediastreamvalidator', ['-t 10', '-O ./out_json', `${urlParam}`])
   chld.stdout.setEncoding('utf8')
 
